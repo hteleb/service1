@@ -1,9 +1,15 @@
 package org.example;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.util.Optional;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Company {
 
     @JsonProperty("cn")
@@ -38,16 +44,5 @@ public class Company {
     public void setClosedOn(String closedOn) {
         this.closedOn = closedOn;
     }
-
-
-
-    public Company(String cn, String createdOn, String closedOn) {
-        this.cn = cn;
-        this.createdOn = createdOn;
-        this.closedOn = closedOn;
-    }
-
-
-
 
 }

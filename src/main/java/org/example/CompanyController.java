@@ -1,5 +1,7 @@
 package org.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,16 +12,18 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.Map;
 
 @RestController
 public class CompanyController {
 
+    @Autowired
+    private Map<String, Company> companiesMap;
     @GetMapping("/v1/companies/{id}")
     public ResponseEntity<Company> getCompanies(@PathVariable("id") String id) {
 
-        System.out.println(Instant.now().toString());
-        Company company1 = new Company("company1", ZonedDateTime.of(2023, 4, 22, 8, 30, 20, 100, ZoneOffset.UTC).toString(),
-                ZonedDateTime.of(2023, 12, 31, 8, 30, 20, 100, ZoneOffset.UTC).toString());
-        return ResponseEntity.ok(company1);
+        if(companiesMap.containsKey(id))
+            return ResponseEntity.ok(companiesMap.get(id));
+       return new ResponseEntity<>(new Company(), HttpStatus.NOT_FOUND);
     }
 }
