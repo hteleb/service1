@@ -13,6 +13,7 @@ import java.util.Map;
 public class CompanyRepository {
 
     @Bean
+
     public Map<String, Company> companiesMap() {
         Map<String, Company> companiesMap = new HashMap<>();
 
